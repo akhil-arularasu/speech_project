@@ -11,10 +11,6 @@ import pandas as pd
 app = Flask(__name__)
 app.secret_key = "hello"
 
-@app.route("/")
-def home():
-    return render_template("index.html")
-
 @app.route("/login", methods=["POST", "GET"])
 def login():
     if request.method == "POST":
@@ -80,13 +76,31 @@ def speech():
         session["polarity_transcript"] = polarity_transcript
         return render_template("speech_analysis.html", script=speech_script, sentiment=testimonial.sentiment)
     else:
-        return render_template("speech.html")
+        name = ""
+        student_category = ""
+        if "name" in session:
+            name = session["name"]
+        if "student_category" in session:
+            student_category = session["student_category"]
+        return render_template("speech.html", name=name, student_category=student_category)
+
+
+@app.route("/home", methods=["POST", "GET"])
+def home():
+        if request.method == "POST":
+            student_name = request.form["name"]
+            student_category = request.form["speech_category"]
+            session["name"] = student_name
+            session["student_category"] = student_category
+            return redirect(url_for("speech"))
+        else:
+            return render_template("home.html")
+
+
 
 @app.route("/<usr>")
 def user(usr):
-    return render_template("index.html", user=usr)
-
-
+    return render_template("home.html", user=usr)
 
 if __name__ == "__main__":
     app.run(debug=True)

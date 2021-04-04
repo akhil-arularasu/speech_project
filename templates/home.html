@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block title %}Home Page{% endblock %}
+{% block content %}
+<h1> Welcome to Speech Guru </h1>
+<br>
+<p> &nbsp; Please enter your name and select your category below:</p>
+
+<form action="#" method="post">
+<label for="name"> Name (First and Last):</label>
+<input type="text" id="name" name="name" size="50"><br><br>
+
+  <label for="speech_category">Choose a speech category:</label>
+
+  <select id="speech_category" name="speech_category">
+    <option value="General Public Speaking">General Public Speaking</option>
+    <option value="Original Oratory">Original Oratory</option>
+    <option value="Declamation">Declamation</option>
+    <option value="Dramatic Interpretation">Dramatic Interpretation/Performance</option>
+    <option value="Program Oral Interpretation">Program Oral Interpretation</option>
+    <option value="Humerous Interpretation">Humerous Interpretation</option>
+  </select>
+
+<br><br>
+
+  <input type="submit" value="Submit">
+
+
+
+{% endblock %}
